@@ -1,0 +1,31 @@
+<table mat-table class="mat-elevation-z8" [dataSource]="products" multiTemplateDataRows>
+  <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+    <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+    <td mat-cell *matCellDef="let product"> {{product[column]}} </td>
+  </ng-container>
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let product" [attr.colspan]="columnsToDisplay.length">
+      <div class="example-element-detail"
+           [@detailExpand]="product == expandedProduct ? 'expanded' : 'collapsed'">
+        <div class="example-element-diagram">
+          <div><img [src]="sanitize(product.encodeImage)" alt="Product image"></div>
+        </div>
+        <div class="example-element-description">
+          opis produktu:
+        </div>
+        <div class="example-element-description">
+          {{product.description}}
+        </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let product; columns: columnsToDisplay;"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedProduct === product"
+      (click)="expandedProduct = expandedProduct === product ? null : product">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
+

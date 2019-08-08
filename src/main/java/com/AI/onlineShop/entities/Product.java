@@ -1,33 +1,33 @@
 package com.AI.onlineShop.entities;
 
 
-
-
 import javax.persistence.*;
 
 @Table(name = "products")
 @Entity
 public class Product {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long prodId;
     private String productName;
     private String description;
     private double price;
     private long prodCategoryId;
     private String imageUrl;
+    @Transient
+    private String encodeImage;
 
     public Product() {
     }
 
-    public Product( String productName, String description, double price, String imageUrl) {
+    public Product(String productName, String description, double price, String imageUrl) {
         this.productName = productName;
         this.description = description;
         this.price = price;
         this.imageUrl = imageUrl;
     }
 
-    public Product( String productName, String description, double price, long prodCategoryId, String imageUrl) {
+    public Product(String productName, String description, double price, long prodCategoryId, String imageUrl) {
         this.productName = productName;
         this.description = description;
         this.price = price;
@@ -88,6 +88,13 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
+    public String getEncodeImage() {
+        return encodeImage;
+    }
+
+    public void setEncodeImage(String encodeImage) {
+        this.encodeImage = encodeImage;
+    }
 }
 
 
