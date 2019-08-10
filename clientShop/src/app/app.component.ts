@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Category} from './categories/Category';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'clientShop';
+  selectedCategory: Category;
+  onCategoryChange(category: Category) {
+    this.selectedCategory = category;
+  }
 }

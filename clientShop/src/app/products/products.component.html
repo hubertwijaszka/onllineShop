@@ -1,4 +1,7 @@
-<table mat-table class="mat-elevation-z8" [dataSource]="products" multiTemplateDataRows>
+<mat-form-field>
+  <input matInput placeholder="Search products" #input>
+</mat-form-field>
+<table mat-table class="mat-elevation-z8" [dataSource]="dataSource" multiTemplateDataRows>
   <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
     <th mat-header-cell *matHeaderCellDef> {{column}} </th>
     <td mat-cell *matCellDef="let product"> {{product[column]}} </td>

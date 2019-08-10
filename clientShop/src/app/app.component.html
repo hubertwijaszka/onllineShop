@@ -1,2 +1,14 @@
-<h1>{{title}}</h1>
-<app-product></app-product>
+
+<mat-grid-list cols="4" gutterSize="10" >
+  <mat-grid-tile-header>
+    <h1>{{title}}</h1>
+  </mat-grid-tile-header>
+  <mat-grid-tile>
+    <app-categories (categoryChange)="onCategoryChange($event)"></app-categories>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="3">
+    <app-product [categoryToDisplay]="selectedCategory?.categoryId"></app-product>
+  </mat-grid-tile>
+</mat-grid-list>
+
+
