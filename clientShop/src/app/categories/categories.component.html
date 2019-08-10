@@ -1,8 +1,10 @@
-<table mat-table [dataSource]="categories" class="category-border" >
-  <ng-container matColumnDef="Categories" class="mat-elevation-z8">
+<table mat-table [dataSource]="categories" class="mat-elevation-z8" >
+  <ng-container matColumnDef="Categories">
     <th mat-header-cell *matHeaderCellDef> Categories </th>
     <td mat-cell *matCellDef="let category"> {{category.categoryName}} </td>
   </ng-container>
   <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"
-      (click)="changeCategory(myRowData)"></tr>
+      (click)="changeCategory(myRowData)"
+      class="element-row"
+      [ngClass]="{'selected-category': selectCategory == myRowData}"></tr>
 </table>
