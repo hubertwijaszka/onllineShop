@@ -22,7 +22,7 @@ export class CategoriesComponent implements OnInit {
       .subscribe(categories => this.categories = categories);
   }
   changeCategory(category: Category): void {
-    this.selectCategory = this.selectCategory === category ? null : category;
-    this.categoryChange.emit(category);
+    this.selectCategory = this.selectCategory === category ? new Category(-1) : category;
+    this.categoryChange.emit(this.selectCategory);
   }
 }
