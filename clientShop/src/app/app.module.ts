@@ -6,7 +6,7 @@ import { ProductsComponent } from './products/products.component';
 import { HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatGridListModule} from '@angular/material';
+import {MatButtonModule, MatGridListModule} from '@angular/material';
 import { CategoriesComponent } from './categories/categories.component';
 import { MatInputModule } from '@angular/material/input';
 
@@ -22,7 +22,8 @@ import { MatInputModule } from '@angular/material/input';
     MatTableModule,
     BrowserAnimationsModule,
     MatGridListModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

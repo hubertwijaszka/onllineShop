@@ -9,6 +9,8 @@ import {Category} from './categories/Category';
 export class RestService {
   private productsUrl = 'http://localhost:8080/products';
   private categoriesUrl = 'http://localhost:8080/categories';
+  private addToCartUrl = 'http://localhost:8080/addToCart';
+  authenticated = false;
   constructor(private http: HttpClient) { }
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.categoriesUrl);
@@ -25,5 +27,13 @@ export class RestService {
         .set('pageNumber', pageNumber.toString())
         .set('pageSize', pageSize.toString())
     });
+  }
+
+    addToCart(product: Product, count = 1) {
+     return this.http.get<Product[]>(this.addToCartUrl, {
+       params: new HttpParams()
+         .set('productId', product.prodId.toString())
+         .set('count', count.toString())
+     });
   }
 }

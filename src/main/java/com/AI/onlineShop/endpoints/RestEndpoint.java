@@ -1,16 +1,14 @@
 package com.AI.onlineShop.endpoints;
 
 import com.AI.onlineShop.entities.Product;
+import com.AI.onlineShop.services.CartService;
 import com.AI.onlineShop.services.CategoryService;
 import com.AI.onlineShop.services.ProductService;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,11 +18,13 @@ public class RestEndpoint {
 
     private ProductService productService;
     private CategoryService categoryService;
+    private CartService cartService;
 
     @Autowired
-    public RestEndpoint(ProductService productService, CategoryService categoryService) {
+    public RestEndpoint(ProductService productService, CategoryService categoryService, CartService cartService) {
         this.categoryService = categoryService;
         this.productService = productService;
+        this.cartService = cartService;
     }
     @CrossOrigin
     @GetMapping("/products")
@@ -52,6 +52,12 @@ public class RestEndpoint {
         }
 
         return result;
+    }
+    @CrossOrigin
+    @GetMapping("/addToCart")
+    public String addToCart(@RequestParam String productId, String count){
+        cartService.addProductToCart(new Integer(count), productId);
+        return null;
     }
 
 }

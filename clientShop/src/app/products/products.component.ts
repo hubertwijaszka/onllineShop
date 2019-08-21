@@ -68,6 +68,11 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     }
     this.dataSource.loadProducts(this.selectedCategoryId, this.input.nativeElement.value);
   }
+  addToCart(product: Product) {
+    let responeProduct;
+    this.restService.addToCart(product)
+      .subscribe(response => responeProduct = response);
+  }
 }
 
 

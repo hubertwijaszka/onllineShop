@@ -19,6 +19,9 @@ public class Product {
 
     public Product() {
     }
+    public Product(long prodId) {
+        this.prodId = prodId;
+    }
 
     public Product(String productName, String description, double price, String imageUrl) {
         this.productName = productName;
