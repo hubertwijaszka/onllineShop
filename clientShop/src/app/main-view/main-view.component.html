@@ -1,0 +1,11 @@
+<mat-grid-list cols="4">
+  <mat-grid-tile-header>
+    <h1>{{title}}</h1>
+  </mat-grid-tile-header>
+  <mat-grid-tile>
+    <app-categories (categoryChange)="onCategoryChange($event)"></app-categories>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="3" class="product_style">
+    <app-product [categoryToDisplay]="selectedCategory?.categoryId" ></app-product>
+  </mat-grid-tile>
+</mat-grid-list>

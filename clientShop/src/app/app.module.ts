@@ -10,9 +10,11 @@ import {MatButtonModule, MatGridListModule} from '@angular/material';
 import { CategoriesComponent } from './categories/categories.component';
 import { MatInputModule } from '@angular/material/input';
 import { CartViewComponent } from './cart-view/cart-view.component';
+import { MainViewComponent } from './main-view/main-view.component';
 
 const appRoutes: Routes = [
-  { path: 'cartView', component: CartViewComponent }
+  { path: 'cartView', component: CartViewComponent},
+  {path: '', component: MainViewComponent}
 ];
 
 
@@ -21,7 +23,8 @@ const appRoutes: Routes = [
     AppComponent,
     ProductsComponent,
     CategoriesComponent,
-    CartViewComponent
+    CartViewComponent,
+    MainViewComponent
   ],
   imports: [
     HttpClientModule,
