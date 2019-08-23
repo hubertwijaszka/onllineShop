@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 
-import {CartDataSource} from './CartDataSource';
+import { DOCUMENT } from '@angular/common';
 import {RestService} from '../rest.service';
 import {ProductCount} from './ProductCount';
+import {Product} from '../products/Product';
 
 @Component({
   selector: 'app-cart-view',
@@ -10,9 +11,10 @@ import {ProductCount} from './ProductCount';
   styleUrls: ['./cart-view.component.css']
 })
 export class CartViewComponent implements OnInit {
-  columnsToDisplay = ['Product Name', 'Product Price', 'Count', 'Buttons'];
+  columnsToDisplay = ['Product Name', 'Product Price', 'Count'];
   dataSource: ProductCount[];
-  constructor( private restService: RestService) {
+  constructor( private restService: RestService,
+               @Inject(DOCUMENT) document) {
     this.getProductInCart();
   }
 
@@ -23,5 +25,11 @@ export class CartViewComponent implements OnInit {
   ngOnInit() {
 
   }
-
+  saveProductInCart(event: any): void {
+    this.restService.changeInCart(event.target.id, event.target.value)
+      .subscribe();
+    if (event.target.value === '0') {
+      this.getProductInCart();
+    }
+  }
 }

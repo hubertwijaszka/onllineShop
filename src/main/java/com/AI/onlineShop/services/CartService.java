@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 
 @Service
@@ -34,5 +34,19 @@ public class CartService {
     }
     public ArrayList<ProductCount>  getProductsFromCart(){
         return this.cart.getProductInCart();
+    }
+
+    public void changeProductInCart(String productId, String count) {
+        List<ProductCount> productInCart = cart.getProductInCart();
+        for(ProductCount productCount : productInCart){
+            if(productCount.getProduct().getProdId() == new Long(productId)){
+                if(new Integer(count) == 0){
+                    productInCart.remove(productCount);
+                }
+                else {
+                    productCount.setCount(new Integer(count));
+                }
+            }
+        }
     }
 }

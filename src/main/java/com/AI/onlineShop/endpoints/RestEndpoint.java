@@ -60,7 +60,7 @@ public class RestEndpoint {
         return null;
     }
     @CrossOrigin
-    @GetMapping("/getProductsFromCart")
+    @GetMapping("/getProductsInCart")
     public String getProductsFromCart(){
         ObjectMapper objectMapper = new ObjectMapper();
         String result = null;
@@ -71,6 +71,11 @@ public class RestEndpoint {
         }
 
         return result;
+    }
+    @CrossOrigin
+    @GetMapping("/changeProductInCart")
+    public void changeProductInCart(@RequestParam String productId, @RequestParam String count){
+            cartService.changeProductInCart(productId,count);
     }
 
 }
