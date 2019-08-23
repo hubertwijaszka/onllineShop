@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 @Component
-@SessionScope
 public class Cart {
     private ArrayList<ProductCount> productInCart;
 

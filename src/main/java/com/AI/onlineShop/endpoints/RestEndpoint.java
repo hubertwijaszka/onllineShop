@@ -55,9 +55,22 @@ public class RestEndpoint {
     }
     @CrossOrigin
     @GetMapping("/addToCart")
-    public String addToCart(@RequestParam String productId, String count){
-        cartService.addProductToCart(new Integer(count), productId);
+    public String addToCart(@RequestParam String productId, @RequestParam String count,@RequestParam String productName, @RequestParam String productPrice){
+        cartService.addProductToCart(new Integer(count), productId, productName, productPrice);
         return null;
+    }
+    @CrossOrigin
+    @GetMapping("/getProductsFromCart")
+    public String getProductsFromCart(){
+        ObjectMapper objectMapper = new ObjectMapper();
+        String result = null;
+        try {
+            result = objectMapper.writeValueAsString(cartService.getProductsFromCart());
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
 }
