@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { LogoutComponent } from './logout/logout.component';
 import {AuthGaurdService} from './service/auth-gaurd.service';
 import {BasicAuthHtppInterceptorService} from './service/basic-auth-interceptor.service';
+import { RegistrationComponent } from './registration/registration.component';
 
 const appRoutes: Routes = [
   { path: 'cartView', component: CartViewComponent, canActivate: [AuthGaurdService]},
@@ -33,7 +34,8 @@ const appRoutes: Routes = [
     CartViewComponent,
     MainViewComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    RegistrationComponent
   ],
   imports: [
     HttpClientModule,
