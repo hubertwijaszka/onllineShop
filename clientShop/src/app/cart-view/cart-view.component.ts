@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 
 import { DOCUMENT } from '@angular/common';
-import {RestService} from '../rest.service';
+import {RestService} from '../service/rest.service';
 import {ProductCount} from './ProductCount';
 import {Product} from '../products/Product';
 

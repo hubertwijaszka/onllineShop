@@ -1,4 +1,5 @@
-
+<button *ngIf="!loginService.isUserLoggedIn()" mat-raised-button (click)="goToLoginPage()">Login</button>
+<button *ngIf="loginService.isUserLoggedIn()" mat-raised-button (click)="goToLogout()">Logout</button>
 
 <router-outlet></router-outlet>
 

@@ -3,7 +3,7 @@ import {Product} from './Product';
 import {DomSanitizer} from '@angular/platform-browser';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {ProductsDataSource} from './ProductsDataSource';
-import {RestService} from '../rest.service';
+import {RestService} from '../service/rest.service';
 import {fromEvent} from 'rxjs';
 import {debounceTime, distinctUntilChanged, tap} from 'rxjs/operators';
 

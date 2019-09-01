@@ -3,7 +3,7 @@ import {ProductCount} from './ProductCount';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {CollectionViewer} from '@angular/cdk/collections';
 import {catchError, finalize} from 'rxjs/operators';
-import {RestService} from '../rest.service';
+import {RestService} from '../service/rest.service';
 
 export class CartDataSource implements DataSource<ProductCount> {
 

@@ -1,18 +1,28 @@
 import { Injectable } from '@angular/core';
-import {Product} from './products/Product';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {Product} from '../products/Product';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Category} from './categories/Category';
-import {ProductCount} from './cart-view/ProductCount';
+import {Category} from '../categories/Category';
+import {ProductCount} from '../cart-view/ProductCount';
+import {map} from 'rxjs/operators';
+
+export class User {
+  constructor(
+    public status: string,
+  ) {}
+
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class RestService {
-  private productsUrl = 'http://localhost:8080/products';
-  private categoriesUrl = 'http://localhost:8080/categories';
+  private productsUrl = 'http://localhost:8080/free/products';
+  private categoriesUrl = 'http://localhost:8080/free/categories';
   private addToCartUrl = 'http://localhost:8080/addToCart';
   private getProductFromCartUrl = 'http://localhost:8080/getProductsInCart';
   private changeProductInCartUrl = 'http://localhost:8080/changeProductInCart';
+  private  loginUrl = 'http://localhost:8080/validateLogin';
   authenticated = false;
   constructor(private http: HttpClient) { }
   getCategories(): Observable<Category[]> {
@@ -50,5 +60,28 @@ export class RestService {
         .set('productId', productId)
         .set('count', count.toString())
     });
+  }
+  login(model: any) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + btoa(model.username + ':' + model.password)});
+    return this.http.get<User>(this.loginUrl, {headers}).pipe(
+      map(
+        userData => {
+          sessionStorage.setItem('username', model.username);
+          const authString = 'Basic ' + btoa(model.username  + ':' + model.password);
+          sessionStorage.setItem('basicauth', authString);
+          return userData;
+        }
+      )
+    );
+  }
+
+  isUserLoggedIn() {
+    const user = sessionStorage.getItem('username');
+    console.log(!(user === null));
+    return !(user === null);
+  }
+  logOut() {
+    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('basicauth');
   }
 }
