@@ -6,6 +6,7 @@ import {ProductsDataSource} from './ProductsDataSource';
 import {RestService} from '../service/rest.service';
 import {fromEvent} from 'rxjs';
 import {debounceTime, distinctUntilChanged, tap} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -33,10 +34,12 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   columnsToDisplay = ['productName', 'price'];
   expandedProduct: Product | null;
   dataSource: ProductsDataSource;
+  @Input() isAdmin: boolean;
   @ViewChild('input', {static: false}) input: ElementRef;
 
   constructor(private sanitizer: DomSanitizer,
-              private restService: RestService) {
+              private restService: RestService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -75,6 +78,19 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     this.restService.addToCart(product)
       .subscribe(response => responeProduct = response);
   }
+
+  goToCart() {
+    this.router.navigate(['cartView']);
+    this.restService.isAdminCheck();
+  }
+
+  delete(product: Product) {
+    this.restService.deleteProduct(product)
+      .subscribe(x => console.log('Observer got a next value: ' + x),
+        err => console.error('Observer got an error: ' + err),
+        () => this.dataSource.loadProducts(this.selectedCategoryId, this.input.nativeElement.value));
+  }
+
 }
 
 

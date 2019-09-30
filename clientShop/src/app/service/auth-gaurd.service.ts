@@ -11,6 +11,16 @@ export class AuthGaurdService implements CanActivate {
               private restService: RestService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+
+    if (state.url === '/admin-users' ||
+      state.url === 'admin-orders' || state.url === '/admin-products' || state.url === '/admin-add-product') {
+      if (this.restService.isAdminCheck()) {
+        return true;
+      } else {
+        this.router.navigate(['login']);
+        return false;
+      }
+    }
     if (this.restService.isUserLoggedIn()) {
       return true;
     }

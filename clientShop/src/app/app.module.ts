@@ -12,17 +12,29 @@ import { MatInputModule } from '@angular/material/input';
 import { CartViewComponent } from './cart-view/cart-view.component';
 import { MainViewComponent } from './main-view/main-view.component';
 import { LoginComponent } from './login/login.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LogoutComponent } from './logout/logout.component';
 import {AuthGaurdService} from './service/auth-gaurd.service';
 import {BasicAuthHtppInterceptorService} from './service/basic-auth-interceptor.service';
 import { RegistrationComponent } from './registration/registration.component';
+import { AdminButtonsComponent } from './admin-buttons/admin-buttons.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
+import { AdminProductsComponent } from './admin-products/admin-products.component';
+import { AdminAddProductComponent } from './admin-add-product/admin-add-product.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const appRoutes: Routes = [
   { path: 'cartView', component: CartViewComponent, canActivate: [AuthGaurdService]},
   {path: '', component: MainViewComponent},
+  {path: 'reset-password', component: ResetPasswordComponent},
   {path: 'login', component: LoginComponent},
-  { path: 'logout', component: LogoutComponent}
+  { path: 'logout', component: LogoutComponent},
+  { path: 'registration', component: RegistrationComponent},
+  { path: 'admin-users', component: AdminUsersComponent, canActivate: [AuthGaurdService]},
+  { path: 'admin-orders', component: AdminOrdersComponent, canActivate: [AuthGaurdService]},
+  { path: 'admin-products', component: AdminProductsComponent, canActivate: [AuthGaurdService]},
+  { path: 'admin-add-product', component: AdminAddProductComponent, canActivate: [AuthGaurdService]}
 ];
 
 
@@ -35,7 +47,13 @@ const appRoutes: Routes = [
     MainViewComponent,
     LoginComponent,
     LogoutComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    AdminButtonsComponent,
+    AdminUsersComponent,
+    AdminOrdersComponent,
+    AdminProductsComponent,
+    AdminAddProductComponent,
+    ResetPasswordComponent
   ],
   imports: [
     HttpClientModule,
@@ -46,6 +64,7 @@ const appRoutes: Routes = [
     MatInputModule,
     MatButtonModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(
       appRoutes)
   ],

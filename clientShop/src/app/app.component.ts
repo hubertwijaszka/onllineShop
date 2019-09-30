@@ -22,4 +22,7 @@ export class AppComponent {
     alert('safasf')
     this.router.navigate(['cartView']);
   }*/
+  goToAdminPage() {
+    this.router.navigate(['admin-users']);
+  }
 }

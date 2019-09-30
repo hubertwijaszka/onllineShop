@@ -4,9 +4,9 @@ import com.AI.onlineShop.entities.Product;
 
 public class ProductCount {
     private Product product;
-    private int count;
+    private long count;
 
-    public ProductCount(Product product, int count) {
+    public ProductCount(Product product, long count) {
         this.product = product;
         this.count = count;
     }
@@ -19,7 +19,7 @@ public class ProductCount {
         this.product = product;
     }
 
-    public int getCount() {
+    public long getCount() {
         return count;
     }
 

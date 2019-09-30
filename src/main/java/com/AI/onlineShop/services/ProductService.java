@@ -5,15 +5,10 @@ import com.AI.onlineShop.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,13 +24,15 @@ public class ProductService {
     }
 
     private List<Product> getAllProducts() {
-        List<Product> products = productRepository.findAll();
+        List<Product> products = productRepository.findAllProduct();
         return prepareEncodeImages(products);
     }
 
     private List<Product> prepareEncodeImages(List<Product> products) {
         for (Product product : products) {
-            product.setEncodeImage(getEncodeImage(product.getImageUrl()));
+            if(product.getImageUrl()!= null) {
+                product.setEncodeImage(getEncodeImage(product.getImageUrl()));
+            }
         }
         return products;
     }
@@ -67,10 +64,15 @@ public class ProductService {
             products = productRepository.findByProdCategoryId(categoryIdLong);
         }
         if (filter != null && !filter.isEmpty()) {
-            products = products.stream().filter(c -> c.getProductName().contains(filter) || c.getDescription().contains(filter))
+            products = products.stream().filter(c -> (c.getProductName().contains(filter) || c.getDescription().contains(filter)) && !c.isDeleted())
                     .collect(Collectors.toList());
         }
         return prepareEncodeImages(products);
     }
 
+    public void deleteProduct(String productId) {
+        Product product = productRepository.findById(new Long(productId)).get();
+        product.setDeleted(true);
+        productRepository.save(product);
+    }
 }

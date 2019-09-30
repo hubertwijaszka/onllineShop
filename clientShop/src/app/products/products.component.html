@@ -1,3 +1,4 @@
+<button *ngIf="restService.isUserLoggedIn() && !this.isAdmin" mat-raised-button  (click)="goToCart()" style="float: right">To Cart</button>
 <mat-form-field class="left-margin">
   <input matInput placeholder="Search products" #input>
 </mat-form-field>
@@ -5,7 +6,7 @@
   <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
     <th mat-header-cell *matHeaderCellDef > {{column}} </th>
     <td mat-cell *matCellDef="let product" > {{product[column]}} </td>
-  </ng-container>
+  </ng-container>c
   <ng-container matColumnDef="expandedDetail">
     <td mat-cell *matCellDef="let product" [attr.colspan]="columnsToDisplay.length">
       <div class="element-detail"
@@ -20,7 +21,8 @@
           {{product.description}}
         </div>
         <div class="element-description">
-          <button mat-raised-button (click)="addToCart(product)">do koszyka</button>
+          <button *ngIf="restService.isUserLoggedIn() && !this.isAdmin" mat-raised-button (click)="addToCart(product)">add to cart</button>
+          <button *ngIf="this.isAdmin" mat-raised-button (click)="delete(product)">delete</button>
         </div>
       </div>
     </td>

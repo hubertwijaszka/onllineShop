@@ -1,5 +1,10 @@
+<div class="buttons">
 <button *ngIf="!loginService.isUserLoggedIn()" mat-raised-button (click)="goToLoginPage()">Login</button>
 <button *ngIf="loginService.isUserLoggedIn()" mat-raised-button (click)="goToLogout()">Logout</button>
-
-<router-outlet></router-outlet>
-
+</div>
+<div class="buttons2">
+  <button *ngIf="loginService.isAdminCheck()" mat-raised-button (click)="goToAdminPage()">Admin Panel</button>
+</div>
+<div class="content">
+<router-outlet ></router-outlet>
+</div>

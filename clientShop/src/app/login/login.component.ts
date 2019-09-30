@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   login() {
     (this.restService.login(this.model).subscribe(
         data => {
+          this.restService.isAdmin(this.model).subscribe();
           this.router.navigate(['']);
           this.invalidLogin = false;
         },

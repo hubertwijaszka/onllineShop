@@ -1,0 +1,6 @@
+tr.element-row:hover {
+  background: #777;
+}
+.selected-order{
+  background: #777;
+}

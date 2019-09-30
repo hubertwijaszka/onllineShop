@@ -1,0 +1,6 @@
+<div class="btn-group" style="width:100%">
+  <button mat-raised-button (click)="goToClients()" style="width:25%" [class.selected]="1 === nr">Clients</button>
+  <button mat-raised-button (click)="gotToOrders()" style="width:25%" [class.selected]="2 === nr">Orders</button>
+  <button mat-raised-button (click)="goToProducts()" style="width:25%" [class.selected]="3 === nr">Products</button>
+  <button mat-raised-button (click)="goToAddProduct()"style="width:25%" [class.selected]="4 === nr">Add product</button>
+</div>

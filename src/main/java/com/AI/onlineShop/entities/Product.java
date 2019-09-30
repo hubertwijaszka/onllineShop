@@ -14,6 +14,16 @@ public class Product {
     private double price;
     private long prodCategoryId;
     private String imageUrl;
+    private boolean isDeleted;
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
     @Transient
     private String encodeImage;
 
